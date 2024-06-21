@@ -12,8 +12,10 @@ add_requires("opencv 4.9.0")
 
 add_requires("supercell_flash", "atlas_generator")
 
-target("ScAnimatePlugin")
-    set_kind("$(kind)")
+add_requireconfs("**", {configs = {shared = true}})
+
+target("Plugin")
+    set_kind("shared")
     set_languages("cxx17")
 
     add_packages("supercell_flash", "atlas_generator", "wxwidgets", "cdt", "nlohmann_json", "fmt", "spdlog", "opencv")
@@ -26,9 +28,11 @@ target("ScAnimatePlugin")
     if has_config("SC_ANIMATE_IMAGE_DEBUG") then
         add_defines("CV_DEBUG")
     end
-
-    set_targetdir("$(buildir)/animate_bin")
-    set_extension(".fcm")
+    if is_mode("debug") then
+        set_targetdir("build/animate_bin/Debug")
+    else
+        set_targetdir("build_release/animate_bin/RelWithDebInfo")
+    end
 
     if is_plat("windows") then
         add_defines("_CRT_SECURE_NO_WARNINGS", "_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING")
