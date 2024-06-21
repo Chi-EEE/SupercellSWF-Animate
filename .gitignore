@@ -7,3 +7,5 @@ plugin/include/PluginConfiguration.h
 
 *.p12
 *.zxp
+.xmake
+compile_commands.json
