@@ -2,6 +2,8 @@
 
 #include <unordered_map>
 
+#include <SupercellFlash.h>
+
 #include "ResourcePublisher/Writer/Shared/SharedWriter.h"
 #include "ResourcePublisher/SymbolGenerator/TimelineBuilder/FrameElements/SpriteElement.h"
 
@@ -9,7 +11,6 @@
 
 #include "AtlasGenerator/Generator.h"
 #include "GraphicItem/GraphicGroup.h"
-#include "SupercellFlash.h"
 
 #include "ShapeWriter.h"
 #include "MovieclipWriter.h"
@@ -39,7 +40,7 @@ namespace sc {
 
 		public:
 			// Path to temp sprite file
-			const fs::path sprite_temp_path = fs::path(tmpnam(nullptr)).concat(".png");
+			const std::filesystem::path sprite_temp_path = std::filesystem::path(tmpnam(nullptr)).concat(".png");
 
 			// kokoro
 			SupercellSWF swf;

@@ -5,10 +5,8 @@
 #include <codecvt>
 
 #include <filesystem>
-namespace fs = std::filesystem;
 
-#include "nlohmann/json.hpp"
-using namespace nlohmann;
+#include <nlohmann/json.hpp>
 
 #define SC_wxStringU16(str) wxString((const wchar_t*)str.c_str())
 
@@ -16,7 +14,7 @@ namespace sc {
 	namespace Adobe {
 		class Localization {
 		private:
-			json m_locale;
+			nlohmann::json m_locale;
 
 		public:
 			void Load(std::string LanguageCode);

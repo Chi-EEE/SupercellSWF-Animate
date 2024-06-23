@@ -4,7 +4,7 @@ package("supercell_core")
     set_license("MIT")
 
     add_urls("https://github.com/Chi-EEE/SC-Core.git")
-    add_versions("2024.06.21", "c7f62d1323317080fd763157aebccbf2bcf4ceb9")
+    add_versions("2024.06.21", "feb3d6d30b1dee4e07921173c25dbcfb49f9bbb7")
 
     add_deps("cpptrace")
 

@@ -19,7 +19,6 @@
 #include "ResourcePublisher/ResourcePublisher.h"
 
 #include <filesystem>
-namespace fs = std::filesystem;
 
 namespace sc {
 	namespace Adobe {

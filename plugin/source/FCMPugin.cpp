@@ -29,6 +29,7 @@ namespace sc {
 		{
 			PluginContext& context = PluginContext::Instance();
 			context.logger->info("Called PluginBoot");
+			context.logger->info("Called PluginBootaaaaaaaaaaaaa");
 
 			context.UpdateCallback(callback);
 

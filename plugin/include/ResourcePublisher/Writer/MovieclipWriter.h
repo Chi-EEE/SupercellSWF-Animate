@@ -3,8 +3,9 @@
 #include <algorithm>
 #include <memory>
 
+#include <SupercellFlash.h>
+
 #include "ResourcePublisher/Writer/Shared/SharedWriter.h"
-#include "SupercellFlash.h"
 
 namespace sc {
 	namespace Adobe {

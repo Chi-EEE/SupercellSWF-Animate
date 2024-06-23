@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 
+#include <nlohmann/json.hpp>
+
 #include "AnimateSDK/core/common/FCMTypes.h"
 #include "AnimateSDK/core/common/FCMPluginInterface.h"
 #include "AnimateSDK/app/DocType/IDocType.h"
@@ -15,9 +17,6 @@
 #include "Module/PluginContext.h"
 #include "Module/Version.h"
 #include "FeaturesTypes.h"
-
-#include <nlohmann/json.hpp>
-using namespace nlohmann;
 
 using namespace DocType;
 
@@ -54,9 +53,9 @@ namespace sc {
 			virtual ~FeatureMatrix();
 
 		private:
-			void ReadFeature(json& feature);
-			void ReadProperty(Feature& feature, json& property);
-			void ReadValue(Property& property, json& value);
+			void ReadFeature(nlohmann::json& feature);
+			void ReadProperty(Feature& feature, nlohmann::json& property);
+			void ReadValue(Property& property, nlohmann::json& value);
 
 			Feature* FindFeature(const std::string& inFeatureName);
 

@@ -9,3 +9,4 @@ plugin/include/PluginConfiguration.h
 *.zxp
 .xmake
 compile_commands.json
+vsxmake*

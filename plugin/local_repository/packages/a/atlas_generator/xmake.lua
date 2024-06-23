@@ -4,7 +4,7 @@ package("atlas_generator")
     set_license("MIT")
 
     add_urls("https://github.com/Chi-EEE/AtlasGenerator.git")
-    add_versions("2024.06.21", "ffe142c03cc1602b30a846ea70eb0c2bb62381f7")
+    add_versions("2024.06.21", "e481a0710460b68b1a73dc5f666cc84b44b15791")
 
     add_deps("opencv", "libnest2d")
     add_deps("supercell_core")

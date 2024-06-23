@@ -5,15 +5,15 @@ namespace sc {
 		FeatureMatrix::FeatureMatrix()
 		{
 			PluginContext& context = PluginContext::Instance();
-			fs::path featuresPath = PluginContext::CurrentPath(PluginContext::PathType::Assets) / "features.json";
+			std::filesystem::path featuresPath = PluginContext::CurrentPath(PluginContext::PathType::Assets) / "features.nlohmann::json";
 
 			std::ifstream file(featuresPath);
-			json features = json::array();
+			nlohmann::json features = nlohmann::json::array();
 			try
 			{
-				features = json::parse(file, nullptr, true, true);
+				features = nlohmann::json::parse(file, nullptr, true, true);
 			}
-			catch (const json::exception exception)
+			catch (const nlohmann::json::exception exception)
 			{
 				context.Trace("Failed to read FeatureMatrix file");
 				context.Trace(exception.what());
@@ -29,7 +29,7 @@ namespace sc {
 		FeatureMatrix::~FeatureMatrix()
 		{}
 
-		void FeatureMatrix::ReadFeature(json& feature) {
+		void FeatureMatrix::ReadFeature(nlohmann::json& feature) {
 			Feature featureItem = Feature(feature["supported"]);
 			std::string featureName = feature["name"];
 			auto featureProperties = feature["properties"];
@@ -45,7 +45,7 @@ namespace sc {
 			m_features.insert(std::pair(featureName, featureItem));
 		}
 
-		void FeatureMatrix::ReadProperty(Feature& feature, json& property) {
+		void FeatureMatrix::ReadProperty(Feature& feature, nlohmann::json& property) {
 			std::string propertyDefault = "";
 			bool isSupported = false;
 
@@ -69,7 +69,7 @@ namespace sc {
 			feature.AddProperty(propertyName, propertyItem);
 		}
 
-		void FeatureMatrix::ReadValue(Property& property, json& value) {
+		void FeatureMatrix::ReadValue(Property& property, nlohmann::json& value) {
 			property.AddValue(value["name"], Value(value["supported"]));
 		}
 

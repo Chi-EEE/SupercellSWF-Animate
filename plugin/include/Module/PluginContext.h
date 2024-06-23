@@ -123,7 +123,7 @@ namespace sc {
 				Assets  // Path to folder with assets files
 			};
 
-			static fs::path CurrentPath(PathType type = PathType::Extension);
+			static std::filesystem::path CurrentPath(PathType type = PathType::Extension);
 
 			static std::string SystemInfo();
 		};

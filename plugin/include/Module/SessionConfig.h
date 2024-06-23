@@ -3,14 +3,11 @@
 #include <string>
 
 #include <filesystem>
-namespace fs = std::filesystem;
+
+#include "SupercellFlash.h"
 
 #include "AnimateSDK/app/DOM/IFLADocument.h"
 #include "AnimateSDK/core/IFCMDictionary.h"
-#include "SupercellFlash.h"
-
-#include "nlohmann/json.hpp"
-using namespace nlohmann;
 
 namespace sc {
 	namespace Adobe {
@@ -46,13 +43,13 @@ namespace sc {
 			DOM::PIFLADocument document = nullptr;
 
 		public:
-			fs::path outputFilepath = "";
+			std::filesystem::path outputFilepath = "";
 
 			bool backwardCompatibility = false;
 
 			sc::SWFStream::Signature compression = sc::SWFStream::Signature::Zstandard;
 			bool exportToExternal = false;
-			fs::path exportToExternalPath = "";
+			std::filesystem::path exportToExternalPath = "";
 
 			SWFTexture::TextureEncoding textureEncoding = SWFTexture::TextureEncoding::KhronosTexture;
 			bool hasExternalTexture = false;

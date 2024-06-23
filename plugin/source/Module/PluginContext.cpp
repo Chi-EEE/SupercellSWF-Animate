@@ -16,11 +16,11 @@ namespace sc
 		PluginContext::PluginContext()
 		{
 			const std::string log_name = std::string(DOCTYPE_UNIVERSAL_NAME "_export_log.txt");
-			const fs::path log_path = fs::temp_directory_path() / log_name;
+			const std::filesystem::path log_path = std::filesystem::temp_directory_path() / log_name;
 
-			if (fs::exists(log_path))
+			if (std::filesystem::exists(log_path))
 			{
-				fs::remove(log_path);
+				std::filesystem::remove(log_path);
 			}
 
 			logger_file = std::ofstream(log_path);
@@ -75,21 +75,21 @@ namespace sc
 			return nullptr;
 		}
 
-		fs::path PluginContext::CurrentPath(PluginContext::PathType type)
+		std::filesystem::path PluginContext::CurrentPath(PluginContext::PathType type)
 		{
-			fs::path modulePath;
+			std::filesystem::path modulePath;
 
 #ifdef _WINDOWS
 			char16_t* pathPtr = new char16_t[MAX_PATH];
 			GetModuleFileName((HINSTANCE)&__ImageBase, (LPWSTR)pathPtr, MAX_PATH - 1);
 
-			modulePath = fs::path(std::u16string((const char16_t*)pathPtr)).parent_path();
+			modulePath = std::filesystem::path(std::u16string((const char16_t*)pathPtr)).parent_path();
 			delete[] pathPtr;
 #else
 #error Not implemented
 #endif
-			fs::path extensionPath = fs::path(modulePath / "../");
-			fs::path assetsPath = fs::path(extensionPath / "resources");
+			std::filesystem::path extensionPath = std::filesystem::path(modulePath / "../");
+			std::filesystem::path assetsPath = std::filesystem::path(extensionPath / "resources");
 
 			switch (type)
 			{

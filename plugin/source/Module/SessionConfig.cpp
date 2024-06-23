@@ -1,4 +1,7 @@
 #include "Module/SessionConfig.h"
+
+#include "nlohmann/json.hpp"
+
 #include "Module/PluginContext.h"
 #include "PluginConfiguration.h"
 #include "Module/Localization.h"
@@ -25,9 +28,9 @@ namespace sc {
 
 			context.logger->info("Publish Settings:");
 
-			json data = json::parse(serializedConfig);
+			nlohmann::json data = nlohmann::json::parse(serializedConfig);
 
-			outputFilepath = fs::path(Localization::ToUtf16(data["output"]));
+			outputFilepath = std::filesystem::path(Localization::ToUtf16(data["output"]));
 			context.logger->info("	outputFilepath: {}", outputFilepath.string());
 
 			backwardCompatibility = data["backwardCompatibility"];
@@ -42,7 +45,7 @@ namespace sc {
 			exportToExternal = data["exportToExternal"];
 			context.logger->info("	exportToExternal: {}", exportToExternal);
 
-			exportToExternalPath = fs::path(Localization::ToUtf16(data["exportToExternalPath"]));
+			exportToExternalPath = std::filesystem::path(Localization::ToUtf16(data["exportToExternalPath"]));
 			context.logger->info("	exportToExternalPath: {}", exportToExternalPath.string());
 
 			hasExternalTexture = data["hasExternalTexture"];
@@ -105,14 +108,14 @@ namespace sc {
 
 		void PluginSessionConfig::Normalize()
 		{
-			fs::path documentPath;
+			std::filesystem::path documentPath;
 			{
 				FCM::StringRep16 documentPathPtr;
 				document->GetPath(&documentPathPtr);
 				PluginContext& context = PluginContext::Instance();
 				if (documentPathPtr)
 				{
-					documentPath = fs::path((const char16_t*)documentPathPtr);
+					documentPath = std::filesystem::path((const char16_t*)documentPathPtr);
 					context.falloc->Free(documentPathPtr);
 				}
 			}
@@ -138,7 +141,7 @@ namespace sc {
 
 			if (outputFilepath.has_extension())
 			{
-				fs::path outputExt = outputFilepath.extension();
+				std::filesystem::path outputExt = outputFilepath.extension();
 				if (outputExt.compare(".xfl") == 0)
 				{
 					outputFilepath = outputFilepath.parent_path();

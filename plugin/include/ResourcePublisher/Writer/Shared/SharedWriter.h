@@ -1,12 +1,11 @@
 #pragma once
 
+#include <filesystem>
+
 #include "generic/ref.h"
 #include "SharedMovieclipWriter.h"
 #include "SharedGraphicWriter.h"
 #include "ResourcePublisher/SymbolGenerator/TimelineBuilder/FrameElements/TextElement.h"
-
-#include <filesystem>
-namespace fs = std::filesystem;
 
 namespace sc {
 	namespace Adobe {

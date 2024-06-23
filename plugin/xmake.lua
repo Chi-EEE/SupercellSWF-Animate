@@ -1,4 +1,11 @@
-add_rules("mode.debug", "mode.release")
+add_rules("mode.debug", "mode.releasedbg")
+if has_config("shared") then
+    add_requireconfs("*", {configs = {shared = true}})
+    set_runtimes("MD")
+else
+    add_requireconfs("*", {configs = {shared = false}})
+    set_runtimes("MT")
+end
 
 add_repositories("local-repo local_repository")
 
@@ -12,13 +19,11 @@ add_requires("opencv 4.9.0")
 
 add_requires("supercell_flash", "atlas_generator")
 
-add_requireconfs("**", {configs = {shared = true}})
-
 target("Plugin")
-    set_kind("shared")
+    set_kind("$(kind)")
     set_languages("cxx17")
 
-    add_packages("supercell_flash", "atlas_generator", "wxwidgets", "cdt", "nlohmann_json", "fmt", "spdlog", "opencv")
+    add_packages("supercell_flash", "atlas_generator", "wxwidgets", "cdt", "nlohmann_json", "fmt", "spdlog", "opencv", "openmp")
 
     add_files("source/**.cpp")
     add_includedirs("include")

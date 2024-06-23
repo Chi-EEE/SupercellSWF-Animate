@@ -18,10 +18,10 @@ namespace sc {
 			FCM::StringRep16 documentPathPtr;
 			config.document->GetPath(&documentPathPtr);
 
-			fs::path documentName = "Untitled";
+			std::filesystem::path documentName = "Untitled";
 			if (documentPathPtr)
 			{
-				documentName = fs::path((const char16_t*)documentPathPtr).filename();
+				documentName = std::filesystem::path((const char16_t*)documentPathPtr).filename();
 				context.falloc->Free(documentPathPtr);
 			}
 
@@ -31,7 +31,7 @@ namespace sc {
 
 			{
 				wxIcon icon;
-				fs::path iconPath = PluginContext::CurrentPath(PluginContext::PathType::Assets) / "window.ico";
+				std::filesystem::path iconPath = PluginContext::CurrentPath(PluginContext::PathType::Assets) / "window.ico";
 				context.logger->info("Loading icon by path: {}", iconPath.string());
 				icon.LoadFile(iconPath.wstring(), wxBITMAP_TYPE_ICO);
 				if (icon.IsOk()) {
@@ -40,12 +40,12 @@ namespace sc {
 			}
 
 			{
-				fs::path animFolder = PluginContext::CurrentPath(PluginContext::PathType::Assets) / "loading";
+				std::filesystem::path animFolder = PluginContext::CurrentPath(PluginContext::PathType::Assets) / "loading";
 				context.logger->info("Anims storage path: {}", animFolder.string());
 
 				std::vector<std::wstring> files;
 
-				for (const auto& entry : fs::directory_iterator(animFolder)) {
+				for (const auto& entry : std::filesystem::directory_iterator(animFolder)) {
 					files.push_back(entry.path().wstring());
 				}
 

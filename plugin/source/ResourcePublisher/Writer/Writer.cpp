@@ -6,7 +6,7 @@ namespace sc {
 		{
 			PluginSessionConfig& config = PluginSessionConfig::Instance();
 
-			if (config.exportToExternal && !fs::exists(config.exportToExternalPath))
+			if (config.exportToExternal && !std::filesystem::exists(config.exportToExternalPath))
 			{
 				throw PluginException("TID_SWF_MISSING_EXTERNAL_FILE", config.exportToExternalPath.wstring().c_str());
 			}
@@ -14,7 +14,7 @@ namespace sc {
 
 		SCWriter::~SCWriter()
 		{
-			if (fs::exists(sprite_temp_path)) {
+			if (std::filesystem::exists(sprite_temp_path)) {
 				remove(sprite_temp_path);
 			}
 		}
@@ -124,12 +124,13 @@ namespace sc {
 		}
 
 		void SCWriter::LoadExternal() {
+			PluginContext& context = PluginContext::Instance();
 			PluginSessionConfig& config = PluginSessionConfig::Instance();
 
-			fs::path& filepath = config.exportToExternalPath;
+			std::filesystem::path& filepath = config.exportToExternalPath;
+			context.logger->info("Loading external file: {}", filepath.u8string());
 
-			SupercellSWF base_swf;
-			base_swf.load(filepath);
+			SupercellSWF base_swf = sc::load(filepath);
 
 			uint16_t idOffset = 0;
 			{
@@ -583,6 +584,8 @@ namespace sc {
 			PluginContext& context = PluginContext::Instance();
 			PluginSessionConfig& config = PluginSessionConfig::Instance();
 
+			context.logger->info("Finalizing SWF...");
+
 			enum FinalizeStep : uint8_t
 			{
 				INIT = 0,
@@ -626,8 +629,8 @@ namespace sc {
 				swf.use_external_texture_files = config.hasExternalCompressedTexture;
 			}
 
-			fs::path filepath = config.outputFilepath.replace_extension("sc");
-			fs::path basename = filepath.filename();
+			std::filesystem::path filepath = config.outputFilepath.replace_extension("sc");
+			std::filesystem::path basename = filepath.filename();
 
 			status->SetProgress(EXTERNAL_LOADING);
 			status->SetStatusLabel(
@@ -636,7 +639,7 @@ namespace sc {
 				)
 			);
 
-			swf.save(filepath, config.compression);
+			sc::save(swf, filepath, config.compression);
 
 			context.Window()->DestroyStatusBar(status);
 		}

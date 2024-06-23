@@ -21,7 +21,6 @@
 #include "Module/Symbol/SymbolContext.h"
 
 #include <filesystem>
-namespace fs = std::filesystem;
 
 using namespace DOM::Service::Image;
 

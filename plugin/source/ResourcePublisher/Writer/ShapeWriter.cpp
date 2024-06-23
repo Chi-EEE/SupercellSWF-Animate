@@ -2,8 +2,7 @@
 #include "ResourcePublisher/Writer/ShapeWriter.h"
 #include "Module/PluginContext.h"
 
-#include "opencv2/opencv.hpp"
-using namespace sc;
+#include <opencv2/opencv.hpp>
 
 #include "CDT.h"
 

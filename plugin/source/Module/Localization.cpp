@@ -1,35 +1,39 @@
 #include "Module/Localization.h"
 #include "Module/PluginContext.h"
 
-#include <sstream>
+#include <fstream>
+#include <filesystem>
+#include <nlohmann/json.hpp>
+#include <codecvt>
+#include <locale>
 
 namespace sc {
 	namespace Adobe {
 		void Localization::Load(std::string LanguageCode) {
 			PluginContext& context = PluginContext::Instance();
 
-			fs::path localesPath = PluginContext::CurrentPath(PluginContext::PathType::Locale);
+			std::filesystem::path localesPath = PluginContext::CurrentPath(PluginContext::PathType::Locale);
 			context.logger->info("Locales storage: {}", localesPath.string());
 
-			fs::path currentLocalePath = fs::path(localesPath / LanguageCode.append(".json"));
+			std::filesystem::path currentLocalePath = localesPath / (LanguageCode + ".json");
 
-			if (!fs::exists(currentLocalePath)) {
-				currentLocalePath = fs::path(localesPath / "en_US.json");
+			if (!std::filesystem::exists(currentLocalePath)) {
+				currentLocalePath = localesPath / "en_US.json";
 			}
 
 			context.logger->info("Active locale file: {}", currentLocalePath.string());
 			std::ifstream file(currentLocalePath);
 
 			try {
-				m_locale = json::parse(file, nullptr, true, true);
+				m_locale = nlohmann::json::parse(file, nullptr, true, true);
 			}
-			catch (const json::exception& exception)
+			catch (const nlohmann::json::exception& exception)
 			{
 				context.logger->error("Failed to parse locale file: {}", exception.what());
 				context.Trace("Failed to load localization");
 				context.Trace(exception.what());
 			}
-		};
+		}
 
 		std::string Localization::GetUTF(const std::string& TID) {
 			auto value = m_locale[TID];
