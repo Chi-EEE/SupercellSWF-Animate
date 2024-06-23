@@ -4,8 +4,6 @@
 #include <fstream>
 #include <filesystem>
 #include <nlohmann/json.hpp>
-#include <codecvt>
-#include <locale>
 
 namespace sc {
 	namespace Adobe {
@@ -22,9 +20,9 @@ namespace sc {
 			}
 
 			context.logger->info("Active locale file: {}", currentLocalePath.string());
-			std::ifstream file(currentLocalePath);
-
-			try {
+			std::ifstream file;
+			file.open(currentLocalePath);
+			/*try {
 				m_locale = nlohmann::json::parse(file, nullptr, true, true);
 			}
 			catch (const nlohmann::json::exception& exception)
@@ -32,7 +30,7 @@ namespace sc {
 				context.logger->error("Failed to parse locale file: {}", exception.what());
 				context.Trace("Failed to load localization");
 				context.Trace(exception.what());
-			}
+			}*/
 		}
 
 		std::string Localization::GetUTF(const std::string& TID) {

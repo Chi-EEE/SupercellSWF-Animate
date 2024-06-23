@@ -17,17 +17,27 @@ add_requires("fmt 10.2.1")
 add_requires("spdlog v1.13.0")
 add_requires("opencv 4.9.0")
 
-add_requires("supercell_flash", "atlas_generator")
+add_requires("supercell_flash")
+add_requires("atlas_generator")
 
 target("Plugin")
     set_kind("$(kind)")
     set_languages("cxx17")
 
-    add_packages("supercell_flash", "atlas_generator", "wxwidgets", "cdt", "nlohmann_json", "fmt", "spdlog", "opencv", "openmp")
+    add_packages("supercell_flash")
+    add_packages("atlas_generator", "wxwidgets", "cdt", "nlohmann_json", "fmt", "spdlog", "opencv", "openmp")
 
     add_files("source/**.cpp")
     add_includedirs("include")
     add_headerfiles("include/(**.h)", "include/(**.hpp)")
+
+    set_extension(".fcm")
+
+    if is_plat("windows") and is_kind("shared") then
+        add_rules("utils.symbols.export_all", {export_classes = true})
+    end
+
+    add_syslinks("msvcrt", "user32", "gdi32", "winspool", "comdlg32", "advapi32", "shell32", "ole32", "oleaut32", "uuid", "odbc32", "odbccp32", "opengl32")
 
     -- SC Animate Image Debug Mode
     if has_config("SC_ANIMATE_IMAGE_DEBUG") then
