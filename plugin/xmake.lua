@@ -1,5 +1,5 @@
 add_rules("mode.debug", "mode.releasedbg")
-if has_config("shared") then
+if is_kind("shared") then
     add_requireconfs("*", {configs = {shared = true}})
     set_runtimes("MD")
 else
