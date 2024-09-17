@@ -17,6 +17,8 @@ namespace sc {
 			SCShapeWriter(SCWriter& writer, SymbolContext& symbol) : m_writer(writer), m_symbol(symbol), m_group(symbol) {};
 			virtual ~SCShapeWriter() = default;
 
+			const float RasterizationResolution = 2.0f;
+
 		public:
 			virtual void AddGraphic(const SpriteElement& item, const DOM::Utils::MATRIX2D& matrix);
 
@@ -36,6 +38,7 @@ namespace sc {
 			void AddRasterizedRegion(
 				const FilledElementRegion& region,
 				cv::Mat& canvas,
+				DOM::Utils::RECT bound,
 				Point<int32_t> offset = { 0, 0 }
 			);
 
@@ -49,6 +52,9 @@ namespace sc {
 			bool IsValidFilledShapeRegion(const FilledElementRegion& region);
 
 			bool IsComplexShapeRegion(const FilledElementRegion& region);
+
+		public:
+			static void RoundDomRectangle(DOM::Utils::RECT& rect);
 
 		private:
 			SCWriter& m_writer;
