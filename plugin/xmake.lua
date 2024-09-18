@@ -1,13 +1,11 @@
 add_rules("mode.debug", "mode.releasedbg")
 if is_kind("shared") then
-    add_requireconfs("*", {configs = {shared = true}})
+    add_requireconfs("*", {configs = {shared = true, runtimes = "MD", vs_runtime = "MD"}})
     set_runtimes("MD")
 else
-    add_requireconfs("*", {configs = {shared = false}})
+    add_requireconfs("*", {configs = {shared = false, runtimes = "MT", vs_runtime = "MT"}})
     set_runtimes("MT")
 end
-
-add_repositories("local-repo local_repository")
 
 add_requires("libnest2d 2022.11.16")
 add_requires("wxwidgets 3.2.4")
@@ -20,7 +18,7 @@ add_requires("opencv 4.9.0")
 add_requires("supercell_flash")
 add_requires("atlas_generator")
 
-target("Plugin")
+target("ScAnimatePlugin")
     set_kind("$(kind)")
     set_languages("cxx17")
 
