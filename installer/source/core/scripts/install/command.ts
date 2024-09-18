@@ -20,17 +20,17 @@ function baseName(str: string)
         const commands_locale_path = commands_folder + "names.xml";
         const names_xml = FLfile.exists(commands_locale_path) ? FLfile.read(commands_locale_path).split("\n") : default_commands_locale;
 
-        for (const extension of window["SupercellSWF"].manifest.extensions) {
+        for (const extension of window.SupercellSWF.manifest.extensions) {
             if (extension.type !== "command") continue;
 
-            const script_path = window["SupercellSWF"].cwd + extension.path;
+            const script_path = window.SupercellSWF.cwd + extension.path;
             const script_destination = commands_folder + extension.install;
             const script_destination_folder = script_destination.match(/(.*)[\/\\]/)[1] || '';
             FLfile.createFolder(script_destination_folder);
             FLfile.copy(script_path, script_destination);
 
             const script_tid = "TID_COMMAND_" + extension.name + "_NAME";
-            const script_localized_name = window["SupercellSWF"].locale.get(script_tid);
+            const script_localized_name = window.SupercellSWF.locale.get(script_tid);
             if (script_tid != script_localized_name) {
                 const xml_element = "  <name source=\"" + baseName(extension.path) + "\" target=\"" + script_localized_name + "\"></name>";
                 if (names_xml.indexOf(xml_element) == -1)

@@ -1,10 +1,9 @@
 {
     "compilerOptions": {
-        "module": "ES2022",
-        // "noLib": true,
+        "module": "ES2015",
+        "noLib": true,
         "types": [
             "types-for-adobe/Animate/22.0",
-            "node",
         ]
     }, 
     "exclude": [

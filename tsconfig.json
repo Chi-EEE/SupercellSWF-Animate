@@ -1,12 +1,8 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "target": "ES2023",
-        "module": "commonjs",
-        "types": [
-            "node",
-            "css-font-loading-module",
-        ],
+        "target": "ES2022",
+        "module": "CommonJS",
         "moduleResolution": "node",
         "strict": true,
         "allowUnreachableCode": false,

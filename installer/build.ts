@@ -7,7 +7,7 @@ const args = process.argv;
 const outputPath = args[2];
 copyDir("./runtime", outputPath)
 
-execSync(`tsc --target ES2022 --module commonjs --lib es2022 --skipLibCheck --outDir \"${outputPath}\"`, {stdio: [0, 1, 2], cwd: __dirname})
+execSync(`tsc --outDir \"${outputPath}\"`, {stdio: [0, 1, 2], cwd: __dirname})
 
 function rename_files(path: string)
 {

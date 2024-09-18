@@ -4,7 +4,6 @@ package("supercell_flash")
     set_license("MIT")
 
     add_urls("https://github.com/Chi-EEE/SupercellFlash.git")
-    add_versions("2024.09.15", "d7879b6b550c94c56b5240190bbd67d9d55a9774")
     add_versions("2024.06.21", "f824f7f84b892a14f5886515ad16ade45c034f48")
 
     add_deps("supercell_compression", "supercell_core")
