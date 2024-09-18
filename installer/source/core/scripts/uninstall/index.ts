@@ -1,9 +1,9 @@
 (
     function()
     {
-        const cep_path = window.SupercellSWF.user_cep();
+        const cep_path = window["SupercellSWF"].user_cep();
 
-        for (const extension of window.SupercellSWF.user_manifest.extensions)
+        for (const extension of window["SupercellSWF"].user_manifest.extensions)
         {
             switch (extension.type)
             {
@@ -17,6 +17,6 @@
             }
         }
 
-        FLfile.remove(window.SupercellSWF.user_manifest_path);
+        FLfile.remove(window["SupercellSWF"].user_manifest_path);
     }
 )()

@@ -1,9 +1,9 @@
 function install_windows(extension: Extension) {
-    const package_path = FLfile.uriToPlatformPath(window.SupercellSWF.cwd + extension.path);
-    const archiver_bin = FLfile.uriToPlatformPath(window.SupercellSWF.cwd + "core/bin/windows/7z.exe");
-    const unpack_log = window.SupercellSWF.cwd + "unpack_log.txt";
+    const package_path = FLfile.uriToPlatformPath(window["SupercellSWF"].cwd + extension.path);
+    const archiver_bin = FLfile.uriToPlatformPath(window["SupercellSWF"].cwd + "core/bin/windows/7z.exe");
+    const unpack_log = window["SupercellSWF"].cwd + "unpack_log.txt";
 
-    const extensions_folder = window.SupercellSWF.user_cep() + "extensions/";
+    const extensions_folder = window["SupercellSWF"].user_cep() + "extensions/";
     const destination_folder = extensions_folder + extension.install;
 
     if (FLfile.exists(destination_folder))
@@ -18,7 +18,7 @@ function install_windows(extension: Extension) {
 (
     function () {
         const [os, version] = fl.version.split(" ");
-        for (const extension of window.SupercellSWF.manifest.extensions) {
+        for (const extension of window["SupercellSWF"].manifest.extensions) {
             if (extension.type !== "extension") continue;
 
             switch (os) {

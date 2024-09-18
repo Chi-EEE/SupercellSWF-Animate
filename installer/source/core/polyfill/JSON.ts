@@ -1,5 +1,5 @@
 
-const JSON = {
+const CustomJSON = {
     parse: function (data: string) {
         if (!data) {
             return {};
