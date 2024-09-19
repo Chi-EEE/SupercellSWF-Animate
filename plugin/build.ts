@@ -65,8 +65,12 @@ function buildWindows() {
         return;
     }
 
-    exec(`"${cmakePath}" -S "${__dirname}" -B "${buildDirectory}" ${CmakeFlags}`);
-    exec(`"${cmakePath}" --build "${buildDirectory}" --config ${activeConfiguration}`);
+    if (isDev) {
+        exec("xmake f --mode=debug --kind=shared")
+    } else {
+        exec("xmake f --mode=releasedbg --kind=shared")
+    }
+    exec("xmake build ScAnimatePlugin")
 
     copyDir(binaryDirectory, outputDirectory);
     progress("Done");
