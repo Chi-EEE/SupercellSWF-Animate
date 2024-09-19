@@ -201,6 +201,10 @@ Instruction will be divided into 3 parts, instructions for building Plugin and P
     And make sure you have installed Visual Studio with C++ build tools and also cmake which should be in system variables or PATH. That's all!  
 
 Next, after preparing all modules, you need to open console in root of repository.
+    Install node modules inside the root folder with command:
+    `
+    npm install
+    `
 - Debug  
     If you want to use a debug build you need to use this command:  
     `
