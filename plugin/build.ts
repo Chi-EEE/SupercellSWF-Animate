@@ -70,7 +70,7 @@ function buildWindows() {
     } else {
         exec("xmake f --mode=releasedbg --kind=shared")
     }
-    exec("xmake build ScAnimatePlugin")
+    exec("xmake build Plugin")
 
     copyDir(binaryDirectory, outputDirectory);
     progress("Done");

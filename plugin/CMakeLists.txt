@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 include(FetchContent)
 
-set(TARGET ScAnimatePlugin)
+set(TARGET Plugin)
 project(${TARGET})
 
 option(SC_ANIMATE_IMAGE_DEBUG "SC Plugin Image Debug Mode" OFF)

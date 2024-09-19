@@ -208,9 +208,10 @@ Next, after preparing all modules, you need to open console in root of repositor
 - Debug  
     If you want to use a debug build you need to use this command:  
     `
-    npm run build:dev
+    npm run build:dev / npm run build:prod
     `  
     After that, extension should load into Adobe Animate.
+    (Try reinstalling Adobe Animate if the extension does not work.)
 - Release  
     To build a zxp package, you need to fill in certificate details in `scripts/cert.ts` and then run following command:  
     `

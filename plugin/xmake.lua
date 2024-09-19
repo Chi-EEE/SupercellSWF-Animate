@@ -18,7 +18,7 @@ add_requires("opencv 4.9.0")
 add_requires("supercell_flash")
 add_requires("atlas_generator")
 
-target("ScAnimatePlugin")
+target("Plugin")
     set_kind("$(kind)")
     set_languages("cxx17")
 
